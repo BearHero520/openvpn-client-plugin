@@ -1,0 +1,10 @@
+import {readFile, writeFile, mkdir} from 'node:fs/promises';
+const root = new URL('../', import.meta.url);
+const read = p => readFile(new URL(p, root), 'utf8');
+const core = (await read('src/core.mjs')).replace(/^export /gm, '');
+const assets = {};
+for (const name of ['service.sh', 'network.sh', 'route.sh', 'down.sh', 'resolve.awk']) assets[name] = await read(`src/${name}`);
+const ui = await read('src/ui.js');
+await mkdir(new URL('dist/', root), {recursive:true});
+await writeFile(new URL('dist/OpenVPN客户端插件.js', root), `//<script>\n// OpenVPN客户端插件 v2.0.0 | https://github.com/BearHero520/openvpn-client-plugin\n(async () => {\n'use strict';\n${core}\nconst ASSETS = ${JSON.stringify(assets)};\n${ui}\n})().catch(error => { console.error('[OpenVPN]', error.message); if (typeof createToast === 'function') createToast(error.message, 'red'); });\n//</script>\n`);
+console.log('Built dist/OpenVPN客户端插件.js');

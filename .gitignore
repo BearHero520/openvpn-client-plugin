@@ -1,0 +1,11 @@
+original.local.js
+node_modules/
+work/
+*.ovpn
+*.key
+*.pem
+*.p12
+pass.txt
+*.log
+.env*
+*.zip
