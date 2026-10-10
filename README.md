@@ -1,5 +1,7 @@
 # OpenVPN客户端插件
 
+> **v2.0.0 暂停推荐使用。** 已收到删除插件后原代理失效的反馈。此版本删除网页 JS 不会同步停止后台服务；断线保护、DNS 重定向和自启可能残留。正在核查设备。已安装者请先通过设备 root 终端执行 `/data/kano_openvpn/client-v2/service.sh stop`，检查成功后再移除插件，并取消对应开机自启。若脚本已被删除或停止失败，不要清空全部防火墙，应根据实际规则定向清理。自动测试未覆盖宿主删除插件的生命周期，不能作为该场景可靠性的证明。
+
 [![Validate plugin](https://github.com/BearHero520/openvpn-client-plugin/actions/workflows/ci.yml/badge.svg)](https://github.com/BearHero520/openvpn-client-plugin/actions/workflows/ci.yml)
 
 为 **UFI-TOOLS / Android ARM64 热点设备**重做的 OpenVPN 客户端插件。支持导入 `.ovpn`，修复 Android 策略路由、musl DNS 和连接状态误报等问题。
